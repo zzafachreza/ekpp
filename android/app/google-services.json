@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "959460557926",
+    "project_id": "zavalabs-ekpp",
+    "storage_bucket": "zavalabs-ekpp.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:959460557926:android:fe955c58c929b5162b19a7",
+        "android_client_info": {
+          "package_name": "com.zavalabsekpp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "959460557926-4o65s4iccfd3eimm2uau08s0ib030qif.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA_RFohhFAwlhTXiSrBVD5Xoqv-l7jbuGc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "959460557926-4o65s4iccfd3eimm2uau08s0ib030qif.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
