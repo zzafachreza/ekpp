@@ -118,6 +118,54 @@ export default function Home({navigation}) {
       />
     );
   };
+
+  const DataKategori = ({icon, nama, nama2, onPress}) => {
+    return (
+      <TouchableOpacity
+        onPress={onPress}
+        style={{
+          backgroundColor: colors.white,
+          padding: 5,
+          borderRadius: 10,
+          width: windowWidth / 3.5,
+          height: windowHeight / 6,
+          elevation: 5,
+          justifyContent: 'center',
+        }}>
+        <View>
+          <Icon
+            type="ionicon"
+            name={icon}
+            color={colors.primary}
+            size={windowWidth / 10}
+          />
+        </View>
+        <View>
+          <Text
+            style={{
+              fontFamily: fonts.secondary[600],
+              color: colors.secondary,
+              fontSize: windowWidth / 40,
+              textAlign: 'center',
+              // marginHorizontal: 10,
+            }}>
+            {nama}
+          </Text>
+          <Text
+            style={{
+              fontFamily: fonts.secondary[600],
+              color: colors.secondary,
+              fontSize: windowWidth / 40,
+              textAlign: 'center',
+              // marginHorizontal: 10,
+            }}>
+            {nama2}
+          </Text>
+        </View>
+      </TouchableOpacity>
+    );
+  };
+
   return (
     <ImageBackground
       source={require('../../assets/back.jpeg')}
@@ -131,7 +179,6 @@ export default function Home({navigation}) {
       /> */}
 
       <ScrollView>
-        <MyCarouser />
         {/* bagian untuk point dan redeem */}
 
         <View
@@ -139,6 +186,7 @@ export default function Home({navigation}) {
             marginHorizontal: 10,
             height: windowHeight / 9,
             padding: 10,
+            marginBottom: 20,
             // backgroundColor: colors.white,
             flexDirection: 'row',
             // borderBottomLeftRadius: 10,
@@ -168,45 +216,76 @@ export default function Home({navigation}) {
               justifyContent: 'flex-end',
               flex: 1,
             }}>
-            <TouchableOpacity
-              onPress={() => navigation.navigate('Wa')}
-              style={{
-                padding: 10,
-                justifyContent: 'center',
-                alignItems: 'center',
-              }}>
-              <Icon
-                type="ionicon"
-                name="logo-whatsapp"
-                color={colors.primary}
-                size={windowWidth / 12}
-              />
-            </TouchableOpacity>
+            <Image
+              source={require('../../assets/logo.png')}
+              style={{width: 100, height: 50, resizeMode: 'stretch'}}
+            />
           </View>
         </View>
 
-        <View style={{padding: 10}}>
-          <TouchableOpacity
-            style={{
-              height: windowHeight / 6,
-              backgroundColor: colors.primary,
-              justifyContent: 'center',
-              alignItems: 'center',
-              borderRadius: 10,
-              marginVertical: 10,
-            }}>
-            <Text
-              style={{
-                fontFamily: fonts.secondary[600],
-                fontSize: windowWidth / 15,
-                color: colors.white,
-              }}>
-              {tipe}
-            </Text>
-          </TouchableOpacity>
-        </View>
+        <MyCarouser />
 
-        <MyDashboard tipe={tipe} />
+        {/* <MyDashboard tipe={tipe} /> */}
+
+        <View
+          style={{
+            padding: 10,
+            marginTop: 20,
+          }}>
+          <View
+            style={{
+              flexDirection: 'row',
+              justifyContent: 'space-around',
+              marginTop: 15,
+            }}>
+            <DataKategori
+              onPress={() => navigation.navigate('Account')}
+              icon="person-outline"
+              nama="USER"
+              nama2="ACCOUNT"
+            />
+            <DataKategori
+              onPress={() => navigation.navigate('ProfileLab')}
+              icon="analytics"
+              nama="PROFILE"
+              nama2="LAB"
+            />
+            <DataKategori
+              onPress={() => navigation.navigate('Akses')}
+              icon="finger-print-outline"
+              nama="ABSEN"
+              nama2="ONLINE"
+            />
+          </View>
+          {/*  */}
+          <View
+            style={{
+              flexDirection: 'row',
+              justifyContent: 'space-around',
+              marginTop: 15,
+            }}>
+            <DataKategori
+              onPress={() => navigation.navigate('DataInspeksi')}
+              icon="calendar-outline"
+              nama="PENJADWALAN"
+              nama2="PENGGUNAAN LAB"
+            />
+            <DataKategori
+              onPress={() => navigation.navigate('DataTindak')}
+              icon="flag-outline"
+              nama="DAFTAR ALAT"
+              nama2="DAN BAHAN"
+            />
+            <DataKategori
+              onPress={() => navigation.navigate('DataVerifikasi')}
+              icon="book-outline"
+              nama="LOGBOOK"
+              nama2="ALAT"
+            />
+          </View>
+
+          {/*  */}
+        </View>
       </ScrollView>
     </ImageBackground>
   );

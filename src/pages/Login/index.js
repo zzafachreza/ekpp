@@ -79,7 +79,7 @@ export default function Login({navigation}) {
                   console.log('update token', res);
                 });
 
-              navigation.replace('Pilihan');
+              navigation.replace('MainApp');
             }
           });
       }, 1200);

@@ -31,10 +31,12 @@ import Brand from './Brand';
 import Pilihan from './Pilihan';
 import Masuk from './Masuk';
 import Keluar from './Keluar';
+import ProfileLab from './ProfileLab';
 
 export {
   Splash,
   Pilihan,
+  ProfileLab,
   Wa,
   Masuk,
   Keluar,

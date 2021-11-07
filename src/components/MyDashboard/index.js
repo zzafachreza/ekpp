@@ -17,18 +17,26 @@ import 'intl';
 import 'intl/locale-data/jsonp/en';
 import {color} from 'react-native-elements/dist/helpers';
 
-export default function MyDashboard({tipe}) {
+export default function MyDashboard() {
   const navigation = useNavigation();
   const [data, setData] = useState([
     {
-      nama: 'ABSEN MASUK',
-      tipe: `${tipe}`,
+      nama: 'INDIKATOR',
       nav: 'Masuk',
       foto: 'https://images.unsplash.com/photo-1551650992-ee4fd47df41f?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1180&q=80',
     },
     {
-      nama: 'ABSEN KELUAR',
-      tipe: `${tipe}`,
+      nama: 'PENILAIAN JALUR',
+      nav: 'Keluar',
+      foto: 'https://images.unsplash.com/photo-1509395286499-2d94a9e0c814?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1180&q=80',
+    },
+    {
+      nama: 'LOKASI',
+      nav: 'Masuk',
+      foto: 'https://images.unsplash.com/photo-1551650992-ee4fd47df41f?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1180&q=80',
+    },
+    {
+      nama: 'LAPORAN',
       nav: 'Keluar',
       foto: 'https://images.unsplash.com/photo-1509395286499-2d94a9e0c814?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1180&q=80',
     },
@@ -38,7 +46,7 @@ export default function MyDashboard({tipe}) {
     return (
       <TouchableOpacity
         style={styles.card}
-        onPress={() => navigation.navigate(item.nav, item)}
+        onPress={() => navigation.navigate(item.nav)}
         activeOpacity={1.0}>
         <Image style={styles.image} source={{uri: item.foto}} />
         <View

@@ -20,10 +20,8 @@ export default function BottomNavigator({state, descriptors, navigation}) {
   return (
     <View
       style={{
-        borderTopWidth: 10,
-        borderTopColor: colors.secondary,
         flexDirection: 'row',
-        backgroundColor: colors.primary,
+        backgroundColor: colors.white,
       }}>
       {state.routes.map((route, index) => {
         const {options} = descriptors[route.key];
@@ -81,8 +79,8 @@ export default function BottomNavigator({state, descriptors, navigation}) {
             style={{flex: 1}}>
             <View
               style={{
-                color: isFocused ? colors.primary : '#919095',
-                backgroundColor: colors.primary,
+                color: isFocused ? colors.white : '#919095',
+                backgroundColor: colors.white,
                 paddingTop: 5,
                 paddingBottom: 0,
                 fontSize: 12,
@@ -93,7 +91,7 @@ export default function BottomNavigator({state, descriptors, navigation}) {
               <View
                 style={{
                   position: iconName === 'cart' ? 'absolute' : 'relative',
-                  backgroundColor: colors.primary,
+                  backgroundColor: colors.white,
 
                   position: iconName === 'cart' ? 'absolute' : 'relative',
                   borderColor: iconName === 'cart' ? 'white' : 'white',
@@ -109,14 +107,14 @@ export default function BottomNavigator({state, descriptors, navigation}) {
                   <Icon
                     name={iconName}
                     type="ionicon"
-                    color={isFocused ? colors.secondary : colors.white}
+                    color={isFocused ? colors.secondary : colors.primary}
                   />
                 ) : (
                   <Icon
                     name={iconName}
                     type="ionicon"
                     size={windowWidth / 20}
-                    color={isFocused ? colors.secondary : colors.white}
+                    color={isFocused ? colors.secondary : colors.primary}
                   />
                 )}
                 <Text
@@ -129,7 +127,7 @@ export default function BottomNavigator({state, descriptors, navigation}) {
                         ? 'white'
                         : isFocused
                         ? colors.secondary
-                        : colors.white,
+                        : colors.primary,
                   }}>
                   {label == 'ListRedeem' ? 'Redeem' : label}
                 </Text>

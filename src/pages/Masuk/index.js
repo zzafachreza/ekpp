@@ -26,7 +26,6 @@ export default function Masuk({navigation, route}) {
   const windowWidth = Dimensions.get('window').width;
   const windowHeight = Dimensions.get('window').height;
   const [loading, setLoading] = useState(true);
-  const [tipe, setTipe] = useState('');
   const [latitude, setLatitude] = useState('');
   const [longitude, setLongitude] = useState('');
   const [data, setData] = useState({
@@ -34,15 +33,14 @@ export default function Masuk({navigation, route}) {
     email: null,
     password: null,
     tlp: null,
-    jarak: '0',
+    suhu: '',
     alamat: null,
   });
 
   const [kirim, setKirim] = useState({
-    jarak: data.jarak,
     foto: null,
     jenis: 'MASUK',
-    tipe: null,
+    suhu: '',
   });
 
   const options = {
@@ -121,25 +119,18 @@ export default function Masuk({navigation, route}) {
 
           setLongitude(location.longitude);
           setLoading(false);
+          setKirim({
+            ...kirim,
+            ref_member: res.id,
+            latitude: location.latitude,
+            longitude: location.longitude,
+          });
 
           const jarak = getDistance(
             {latitude: res.latitude, longitude: res.longitude},
             {latitude: location.latitude, longitude: location.longitude},
             1,
           );
-
-          getData('tipe').then(cc => {
-            setTipe(cc);
-
-            setKirim({
-              ...kirim,
-              tipe: cc,
-              jarak: jarak,
-              ref_member: res.id,
-              latitude: location.latitude,
-              longitude: location.longitude,
-            });
-          });
         })
         .catch(error => {
           setLoading(false);
@@ -150,30 +141,20 @@ export default function Masuk({navigation, route}) {
   }, []);
 
   const simpan = () => {
-    if (kirim.jarak <= data.max_jarak && tipe == 'WFO') {
-      setLoading(true);
-      console.log('kirim ke server', kirim);
-      axios
-        .post('https://zavalabs.com/sigadisbekasi/api/transaksi_add.php', kirim)
-        .then(x => {
-          setLoading(false);
-          alert('Absensi Masuk Berhasil Di Kirim');
-          // console.log('respose server', x);
-          navigation.navigate('MainApp');
-        });
-    } else if (kirim.jarak >= data.max_jarak && tipe != 'WFO') {
-      setLoading(true);
-      console.log('kirim ke server', kirim);
-      axios
-        .post('https://zavalabs.com/sigadisbekasi/api/transaksi_add.php', kirim)
-        .then(x => {
-          setLoading(false);
-          alert('Absensi Masuk Berhasil Di Kirim');
-          // console.log('respose server', x);
-          navigation.navigate('MainApp');
-        });
+    setLoading(true);
+    // alert(kirim.suhu.length);
+    console.log('kirim ke server', kirim);
+    if (kirim.suhu.length === 0) {
+      alert('Silahkan isi suhu tubuh');
     } else {
-      alert('Maaf Lokasi Anda Masih Jauh');
+      axios
+        .post('https://zavalabs.com/ekpp/api/transaksi_add.php', kirim)
+        .then(x => {
+          setLoading(false);
+          alert('Absensi Masuk Berhasil Di Kirim');
+          // console.log('respose server', x);
+          navigation.navigate('MainApp');
+        });
     }
   };
   return (
@@ -236,15 +217,6 @@ export default function Masuk({navigation, route}) {
           }}>
           ABSEN MASUK
         </Text>
-        <Text
-          style={{
-            fontFamily: fonts.secondary[400],
-            fontSize: windowWidth / 20,
-            marginBottom: 5,
-            textAlign: 'center',
-          }}>
-          {tipe}
-        </Text>
 
         <View>
           <View
@@ -278,17 +250,24 @@ export default function Masuk({navigation, route}) {
           />
         </View>
       </View>
-
-      <Text
+      <View
         style={{
-          fontFamily: fonts.secondary[400],
-          fontSize: windowWidth / 20,
-          marginBottom: 5,
-          textAlign: 'center',
+          backgroundColor: colors.white,
+          // padding: 10,
         }}>
-        {kirim.jarak} Meter (Dari Sekolah)
-      </Text>
-
+        <MyInput
+          iconname="thermometer"
+          placeholder="masukan suhu tubuh"
+          label="Masukan Suhu Tubuh"
+          value={kirim.suhu}
+          onChangeText={val =>
+            setKirim({
+              ...kirim,
+              suhu: val,
+            })
+          }
+        />
+      </View>
       <MyGap jarak={20} />
       <MyButton
         title="SIMPAN"

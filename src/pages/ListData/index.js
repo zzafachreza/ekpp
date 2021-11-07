@@ -34,7 +34,7 @@ export default function ListData({navigation}) {
       // console.log(res);
 
       axios
-        .post('https://zavalabs.com/sigadisbekasi/api/transaksi.php', {
+        .post('https://zavalabs.com/ekpp/api/transaksi.php', {
           id_member: res.id,
         })
         .then(res => {
@@ -51,7 +51,7 @@ export default function ListData({navigation}) {
         // console.log(res);
 
         axios
-          .post('https://zavalabs.com/sigadisbekasi/api/transaksi.php', {
+          .post('https://zavalabs.com/ekpp/api/transaksi.php', {
             id_member: res.id,
           })
           .then(res => {
@@ -89,8 +89,9 @@ export default function ListData({navigation}) {
                     style={{
                       fontFamily: fonts.secondary[600],
                       fontSize: windowWidth / 30,
+                      color: colors.black,
                     }}>
-                    {item.tipe} - {item.jenis}
+                    ABSEN {item.jenis} LAB
                   </Text>
                   <Text
                     style={{
@@ -98,11 +99,20 @@ export default function ListData({navigation}) {
                       fontSize: windowWidth / 25,
                       color: colors.primary,
                     }}>
-                    {item.nama_lengkap}
+                    {item.nama_lengkap}{' '}
+                    <Text
+                      style={{
+                        fontFamily: fonts.secondary[600],
+                        fontSize: windowWidth / 25,
+                        color: colors.black,
+                      }}>
+                      [ SUHU {item.suhu} ]
+                    </Text>
                   </Text>
                   <Text
                     style={{
                       fontFamily: fonts.secondary[400],
+                      color: colors.black,
                     }}>
                     Tanggal {item.tanggal} Pukul {item.jam}
                   </Text>

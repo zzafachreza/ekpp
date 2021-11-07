@@ -69,7 +69,7 @@ export default function Splash({navigation}) {
         console.log('sudah login logon');
 
         setTimeout(() => {
-          navigation.replace('Pilihan');
+          navigation.replace('MainApp');
         }, 1500);
       }
     });

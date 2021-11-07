@@ -34,15 +34,14 @@ export default function Keluar({navigation, route}) {
     email: null,
     password: null,
     tlp: null,
-    jarak: '0',
+    suhu: null,
     alamat: null,
   });
 
   const [kirim, setKirim] = useState({
-    jarak: data.jarak,
     foto: null,
     jenis: 'KELUAR',
-    tipe: null,
+    suhu: '',
   });
 
   const options = {
@@ -122,23 +121,17 @@ export default function Keluar({navigation, route}) {
           setLongitude(location.longitude);
           setLoading(false);
 
+          setKirim({
+            ...kirim,
+            ref_member: res.id,
+            latitude: location.latitude,
+            longitude: location.longitude,
+          });
+
           const jarak = getDistance(
             {latitude: res.latitude, longitude: res.longitude},
             {latitude: location.latitude, longitude: location.longitude},
           );
-
-          getData('tipe').then(cc => {
-            setTipe(cc);
-
-            setKirim({
-              ...kirim,
-              tipe: cc,
-              jarak: jarak,
-              ref_member: res.id,
-              latitude: location.latitude,
-              longitude: location.longitude,
-            });
-          });
         })
         .catch(error => {
           setLoading(false);
@@ -149,30 +142,20 @@ export default function Keluar({navigation, route}) {
   }, []);
 
   const simpan = () => {
-    if (kirim.jarak <= data.max_jarak && tipe == 'WFO') {
-      setLoading(true);
-      console.log('kirim ke server', kirim);
-      axios
-        .post('https://zavalabs.com/sigadisbekasi/api/transaksi_add.php', kirim)
-        .then(x => {
-          setLoading(false);
-          alert('Absensi Keluar Berhasil Di Kirim');
-          // console.log('respose server', x);
-          navigation.navigate('MainApp');
-        });
-    } else if (kirim.jarak >= data.max_jarak && tipe != 'WFO') {
-      setLoading(true);
-      console.log('kirim ke server', kirim);
-      axios
-        .post('https://zavalabs.com/sigadisbekasi/api/transaksi_add.php', kirim)
-        .then(x => {
-          setLoading(false);
-          alert('Absensi Keluar Berhasil Di Kirim');
-          // console.log('respose server', x);
-          navigation.navigate('MainApp');
-        });
+    // setLoading(true);
+
+    console.log('kirim ke server', kirim);
+    if (kirim.suhu.length === 0) {
+      alert('Silahkan isi suhu tubuh');
     } else {
-      alert('Maaf Lokasi Anda Masih Jauh');
+      axios
+        .post('https://zavalabs.com/ekpp/api/transaksi_add.php', kirim)
+        .then(x => {
+          setLoading(false);
+          alert('Absensi Masuk Berhasil Di Kirim');
+          // console.log('respose server', x);
+          navigation.navigate('MainApp');
+        });
     }
   };
   return (
@@ -235,15 +218,6 @@ export default function Keluar({navigation, route}) {
           }}>
           ABSEN KELUAR
         </Text>
-        <Text
-          style={{
-            fontFamily: fonts.secondary[400],
-            fontSize: windowWidth / 20,
-            marginBottom: 5,
-            textAlign: 'center',
-          }}>
-          {tipe}
-        </Text>
 
         <View>
           <View
@@ -278,15 +252,24 @@ export default function Keluar({navigation, route}) {
         </View>
       </View>
 
-      <Text
+      <View
         style={{
-          fontFamily: fonts.secondary[400],
-          fontSize: windowWidth / 20,
-          marginBottom: 5,
-          textAlign: 'center',
+          backgroundColor: colors.white,
+          // padding: 10,
         }}>
-        {kirim.jarak} Meter (Dari Sekolah)
-      </Text>
+        <MyInput
+          iconname="thermometer"
+          placeholder="masukan suhu tubuh"
+          label="Masukan Suhu Tubuh"
+          value={kirim.suhu}
+          onChangeText={val =>
+            setKirim({
+              ...kirim,
+              suhu: val,
+            })
+          }
+        />
+      </View>
 
       <MyGap jarak={20} />
       <MyButton

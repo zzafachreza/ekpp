@@ -54,26 +54,6 @@ export default function MyCarouser() {
 
   return (
     <View>
-      <View
-        style={{
-          padding: 10,
-          marginBottom: 10,
-          borderBottomWidth: 10,
-          backgroundColor: colors.primary,
-          borderBottomColor: colors.secondary,
-          // justifyContent: 'center',
-          alignItems: 'center',
-        }}>
-        <Text
-          style={{
-            fontFamily: fonts.secondary[800],
-            color: colors.white,
-
-            fontSize: windowWidth / 18,
-          }}>
-          SIGADIS BEKASI
-        </Text>
-      </View>
       <Carousel
         loop={true}
         // layout="stack"

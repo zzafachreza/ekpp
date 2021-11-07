@@ -42,6 +42,7 @@ import {
   Pilihan,
   Masuk,
   Keluar,
+  ProfileLab,
 } from '../pages';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {BottomNavigator} from '../components';
@@ -235,6 +236,33 @@ export default function Router() {
         component={Search2}
         options={({route, navigation}) => ({
           title: 'Layanan',
+          headerTintColor: 'white',
+          headerStyle: {
+            backgroundColor: colors.primary,
+            elevation: 0, // remove shadow on Android
+          },
+          cardStyleInterpolator: ({current, layouts}) => {
+            return {
+              cardStyle: {
+                transform: [
+                  {
+                    translateX: current.progress.interpolate({
+                      inputRange: [0, 1],
+                      outputRange: [layouts.screen.width, 0],
+                    }),
+                  },
+                ],
+              },
+            };
+          },
+        })}
+      />
+
+      <Stack.Screen
+        name="ProfileLab"
+        component={ProfileLab}
+        options={({route, navigation}) => ({
+          title: 'Profile Lab',
           headerTintColor: 'white',
           headerStyle: {
             backgroundColor: colors.primary,
@@ -505,7 +533,7 @@ export default function Router() {
         name="Akses"
         component={Akses}
         options={({route, navigation}) => ({
-          title: 'Masukan Kode Akses',
+          title: 'Pilih Absensi Masuk Atau Keluar',
           headerTintColor: 'white',
           headerStyle: {
             backgroundColor: colors.primary,

@@ -1,135 +1,70 @@
-import React, {useState, useEffect} from 'react';
-import {
-  StyleSheet,
-  Text,
-  Button,
-  View,
-  Image,
-  ScrollView,
-  Dimensions,
-  ImageBackground,
-} from 'react-native';
+import React from 'react';
+import {StyleSheet, Text, View, TouchableOpacity} from 'react-native';
+import {Icon} from 'react-native-elements';
 import {colors} from '../../utils/colors';
-import {fonts} from '../../utils/fonts';
-import {MyInput, MyGap, MyButton} from '../../components';
-import LottieView from 'lottie-react-native';
-import axios from 'axios';
-import {storeData, getData} from '../../utils/localStorage';
-import {showMessage} from 'react-native-flash-message';
+import {windowWidth, fonts} from '../../utils/fonts';
 
-export default function Login({navigation}) {
-  const windowWidth = Dimensions.get('window').width;
-  const windowHeight = Dimensions.get('window').height;
-  const [loading, setLoading] = useState(false);
-  const [token, setToken] = useState('');
-  const [data, setData] = useState({
-    email: null,
-    password: null,
-  });
-
-  useEffect(() => {
-    getData('token').then(res => {
-      console.log('data token,', res);
-      setToken(res.token);
-    });
-  }, []);
-
-  // login ok
-  const masuk = () => {
-    setLoading(true);
-    console.log(data);
-    setTimeout(() => {
-      axios
-        .post('https://zavalabs.com/sigadisbekasi/api/akses.php', data)
-        .then(res => {
-          if (res.data == 'success') {
-            navigation.replace('Pemakaian');
-          } else {
-            showMessage({
-              message: 'Maaf Kode Akses Salah !',
-              type: 'danger',
-            });
-          }
-          setLoading(false);
-        });
-    }, 1200);
-  };
+export default function Akses({navigation}) {
   return (
-    <ImageBackground style={styles.page}>
-      <ScrollView
+    <View
+      style={{
+        flex: 1,
+        padding: 10,
+      }}>
+      <TouchableOpacity
+        onPress={() => navigation.navigate('Masuk')}
         style={{
           flex: 1,
+          backgroundColor: colors.secondary,
+          padding: 10,
+          justifyContent: 'center',
+          alignItems: 'center',
+          marginVertical: 10,
+          borderRadius: 10,
         }}>
-        <View style={{height: 250, flex: 1}}>
-          <LottieView
-            style={{flex: 1}}
-            source={require('../../assets/splash.json')}
-            autoPlay
-            loop
-          />
-        </View>
-        <View style={styles.page}>
-          <Text
-            style={{
-              fontFamily: fonts.secondary[400],
-              fontSize: windowWidth / 20,
-              color: colors.black,
-              // maxWidth: 230,
-            }}>
-            Ini adalah Fitur Untuk Admin
-            <Text
-              style={{
-                fontFamily: fonts.secondary[600],
-                fontSize: windowWidth / 20,
-                color: colors.black,
-                // maxWidth: 230,
-              }}>
-              My Laundry
-            </Text>
-          </Text>
-
-          <MyGap jarak={20} />
-          <MyInput
-            label="Masukan Kode Akses"
-            iconname="key"
-            secureTextEntry
-            autoFocus={true}
-            onChangeText={value =>
-              setData({
-                ...data,
-                password: value,
-              })
-            }
-          />
-          <MyGap jarak={40} />
-          <MyButton
-            warna={colors.primary}
-            title="LANJUT FITUR ADMIN"
-            Icons="log-in"
-            onPress={masuk}
-          />
-        </View>
-      </ScrollView>
-      {loading && (
-        <LottieView
-          source={require('../../assets/animation.json')}
-          autoPlay
-          loop
-          style={{backgroundColor: colors.primary}}
+        <Icon
+          type="ionicon"
+          name="log-in"
+          size={windowWidth / 4}
+          color={colors.white}
         />
-      )}
-    </ImageBackground>
+        <Text
+          style={{
+            fontFamily: fonts.secondary[600],
+            color: colors.white,
+            fontSize: windowWidth / 15,
+          }}>
+          ABSEN MASUK
+        </Text>
+      </TouchableOpacity>
+      <TouchableOpacity
+        onPress={() => navigation.navigate('Keluar')}
+        style={{
+          flex: 1,
+          backgroundColor: colors.primary,
+          padding: 10,
+          justifyContent: 'center',
+          alignItems: 'center',
+          marginVertical: 10,
+          borderRadius: 10,
+        }}>
+        <Icon
+          type="ionicon"
+          name="log-out"
+          size={windowWidth / 4}
+          color={colors.white}
+        />
+        <Text
+          style={{
+            fontFamily: fonts.secondary[600],
+            color: colors.white,
+            fontSize: windowWidth / 15,
+          }}>
+          ABSEN KELUAR
+        </Text>
+      </TouchableOpacity>
+    </View>
   );
 }
 
-const styles = StyleSheet.create({
-  page: {
-    // backgroundColor: 'white',
-    flex: 1,
-    padding: 10,
-  },
-  image: {
-    aspectRatio: 1.5,
-    resizeMode: 'contain',
-  },
-});
+const styles = StyleSheet.create({});

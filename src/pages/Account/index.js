@@ -112,47 +112,6 @@ export default function Account({navigation, route}) {
               {user.alamat}
             </Text>
           </View>
-          <View
-            style={{
-              marginVertical: 10,
-              padding: 10,
-              backgroundColor: colors.white,
-              borderRadius: 10,
-            }}>
-            <Text
-              style={{
-                fontFamily: fonts.secondary[600],
-              }}>
-              Nama Sekolah
-            </Text>
-            <Text
-              style={{
-                fontFamily: fonts.secondary[400],
-              }}>
-              {user.nama_sekolah}
-            </Text>
-          </View>
-
-          <View
-            style={{
-              marginVertical: 10,
-              padding: 10,
-              backgroundColor: colors.white,
-              borderRadius: 10,
-            }}>
-            <Text
-              style={{
-                fontFamily: fonts.secondary[600],
-              }}>
-              Nama Kecamatan
-            </Text>
-            <Text
-              style={{
-                fontFamily: fonts.secondary[400],
-              }}>
-              {user.nama_kecamatan}
-            </Text>
-          </View>
         </View>
 
         {/* <MyButton
