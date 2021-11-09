@@ -26,7 +26,7 @@ export default function Login({navigation}) {
 
   const [token, setToken] = useState('');
   const [data, setData] = useState({
-    nik: '',
+    email: '',
     password: '',
   });
 
@@ -39,13 +39,13 @@ export default function Login({navigation}) {
 
   // login ok
   const masuk = () => {
-    if (data.nik.length === 0 && data.password.length === 0) {
+    if (data.email.length === 0 && data.password.length === 0) {
       showMessage({
-        message: 'Maaf nik dan Password masih kosong !',
+        message: 'Maaf email dan Password masih kosong !',
       });
-    } else if (data.nik.length === 0) {
+    } else if (data.email.length === 0) {
       showMessage({
-        message: 'Maaf nik masih kosong !',
+        message: 'Maaf email masih kosong !',
       });
     } else if (data.password.length === 0) {
       showMessage({
@@ -56,7 +56,7 @@ export default function Login({navigation}) {
       console.log(data);
       setTimeout(() => {
         axios
-          .post('https://zavalabs.com/sigadisbekasi/api/login.php', data)
+          .post('https://zavalabs.com/ekpp/api/login.php', data)
           .then(res => {
             console.log(res.data);
             setLoading(false);
@@ -68,13 +68,10 @@ export default function Login({navigation}) {
             } else {
               storeData('user', res.data);
               axios
-                .post(
-                  'https://zavalabs.com/sigadisbekasi/api/update_token.php',
-                  {
-                    id_member: res.data.id,
-                    token: token,
-                  },
-                )
+                .post('https://zavalabs.com/ekpp/api/update_token.php', {
+                  id_member: res.data.id,
+                  token: token,
+                })
                 .then(res => {
                   console.log('update token', res);
                 });
@@ -133,13 +130,13 @@ export default function Login({navigation}) {
 
           <MyGap jarak={20} />
           <MyInput
-            label="NPM (Mahasiswa) / NIP (Dosen)"
-            iconname="card"
+            label="E - mail"
+            iconname="mail"
             value={data.nama_lengkap}
             onChangeText={value =>
               setData({
                 ...data,
-                nik: value,
+                email: value,
               })
             }
           />

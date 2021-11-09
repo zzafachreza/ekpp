@@ -13,7 +13,7 @@ import {
 } from 'react-native';
 import {colors} from '../../utils/colors';
 import {fonts} from '../../utils/fonts';
-import {MyInput, MyGap, MyButton} from '../../components';
+import {MyInput, MyGap, MyButton, MyPicker} from '../../components';
 import axios from 'axios';
 import {showMessage} from 'react-native-flash-message';
 import LottieView from 'lottie-react-native';
@@ -44,17 +44,18 @@ export default function Register({navigation}) {
   const [data, setData] = useState({
     nama_lengkap: '',
     nik: '',
+    email: '',
     password: '',
+    tipe: '',
     telepon: '',
-    alamat: '',
   });
 
   const simpan = () => {
     if (
       data.nama_lengkap.length === 0 &&
       data.nik.length === 0 &&
+      data.email.length === 0 &&
       data.password.length === 0 &&
-      data.alamat.length === 0 &&
       data.telepon.length === 0
     ) {
       showMessage({
@@ -64,15 +65,15 @@ export default function Register({navigation}) {
       showMessage({
         message: 'Maaf Nama Lengkap masih kosong !',
       });
-    } else if (data.alamat.length === 0) {
-      showMessage({
-        message: 'Maaf Alamat masih kosong !',
-      });
     } else if (data.telepon.length === 0) {
       showMessage({
         message: 'Maaf Telepon masih kosong !',
       });
     } else if (data.nik.length === 0) {
+      showMessage({
+        message: 'Maaf NIK masih kosong !',
+      });
+    } else if (data.email.length === 0) {
       showMessage({
         message: 'Maaf NIK masih kosong !',
       });
@@ -84,7 +85,7 @@ export default function Register({navigation}) {
       setLoading(true);
       console.log(data);
       axios
-        .post('https://zavalabs.com/sigadisbekasi/api/register.php', data)
+        .post('https://zavalabs.com/ekpp/api/register.php', data)
         .then(res => {
           console.log(res);
           let err = res.data.split('#');
@@ -155,6 +156,43 @@ export default function Register({navigation}) {
           labelColor={isEnabled ? colors.white : colors.primary}
           colorIcon={isEnabled ? colors.white : colors.primary}
           borderColor={isEnabled ? colors.white : colors.primary}
+          label="E - mail"
+          iconname="mail"
+          value={data.email}
+          onChangeText={value =>
+            setData({
+              ...data,
+              email: value,
+            })
+          }
+        />
+        <MyGap jarak={10} />
+        <MyPicker
+          onValueChange={val =>
+            setData({
+              ...data,
+              tipe: val,
+            })
+          }
+          label="Tipe User"
+          iconname="grid"
+          data={[
+            {
+              value: 'Pengguna',
+              label: 'Pengguna',
+            },
+            {
+              value: 'Pengelola',
+              label: 'Pengelola',
+            },
+          ]}
+        />
+        <MyGap jarak={10} />
+        <MyInput
+          fontColor={isEnabled ? colors.white : colors.black}
+          labelColor={isEnabled ? colors.white : colors.primary}
+          colorIcon={isEnabled ? colors.white : colors.primary}
+          borderColor={isEnabled ? colors.white : colors.primary}
           label="NPM (Mahasiswa) / NIP (Dosen)"
           iconname="card"
           value={data.nik}
@@ -165,22 +203,7 @@ export default function Register({navigation}) {
             })
           }
         />
-        <MyGap jarak={10} />
-        <MyInput
-          fontColor={isEnabled ? colors.white : colors.black}
-          labelColor={isEnabled ? colors.white : colors.primary}
-          colorIcon={isEnabled ? colors.white : colors.primary}
-          borderColor={isEnabled ? colors.white : colors.primary}
-          label="Alamat"
-          iconname="map"
-          value={data.alamat}
-          onChangeText={value =>
-            setData({
-              ...data,
-              alamat: value,
-            })
-          }
-        />
+
         <MyGap jarak={10} />
         <MyInput
           fontColor={isEnabled ? colors.white : colors.black}

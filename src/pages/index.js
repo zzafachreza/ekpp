@@ -32,11 +32,19 @@ import Pilihan from './Pilihan';
 import Masuk from './Masuk';
 import Keluar from './Keluar';
 import ProfileLab from './ProfileLab';
+import EditProfile from './EditProfile';
+import Pinjam from './Pinjam';
+import ListData2 from './ListData2';
+import Jadwal from './Jadwal';
 
 export {
   Splash,
+  Jadwal,
+  Pinjam,
+  ListData2,
   Pilihan,
   ProfileLab,
+  EditProfile,
   Wa,
   Masuk,
   Keluar,

@@ -30,26 +30,26 @@ export default function MyCarouser() {
 
   const [data, setData] = useState([
     {
-      image:
-        'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80',
+      image: require('../../assets/ekpp1.jpeg'),
     },
     {
-      image:
-        'https://images.unsplash.com/photo-1551135049-8a33b5883817?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1770&q=80',
+      image: require('../../assets/ekpp2.jpeg'),
     },
     {
-      image:
-        'https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1770&q=80',
+      image: require('../../assets/ekpp3.jpeg'),
     },
   ]);
 
   const renderCarouselItem = ({item}) => (
-    <TouchableOpacity style={styles.cardContainer} key={item.id}>
-      <Image
-        source={{uri: item.image}}
-        style={{widht: 200, height: 150, resizeMode: 'cover'}}
-      />
-    </TouchableOpacity>
+    <Image
+      source={item.image}
+      style={{
+        resizeMode: 'cover',
+        height: 180,
+        width: 300,
+        borderRadius: 10,
+      }}
+    />
   );
 
   return (
@@ -84,13 +84,13 @@ const styles = StyleSheet.create({
   cardContainer: {
     backgroundColor: colors.black,
     opacity: 1,
-    height: 140,
+    height: 250,
     width: 300,
     borderRadius: 10,
-    overflow: 'hidden',
+    // overflow: 'hidden',
   },
   cardImage: {
-    height: 50,
+    height: 250,
     width: 300,
     bottom: 0,
     position: 'absolute',

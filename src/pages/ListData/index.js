@@ -36,6 +36,7 @@ export default function ListData({navigation}) {
       axios
         .post('https://zavalabs.com/ekpp/api/transaksi.php', {
           id_member: res.id,
+          tipe: res.tipe,
         })
         .then(res => {
           // console.log(res.data);
@@ -53,6 +54,7 @@ export default function ListData({navigation}) {
         axios
           .post('https://zavalabs.com/ekpp/api/transaksi.php', {
             id_member: res.id,
+            tipe: res.tipe,
           })
           .then(res => {
             console.log(res.data);

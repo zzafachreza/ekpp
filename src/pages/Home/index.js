@@ -168,9 +168,10 @@ export default function Home({navigation}) {
 
   return (
     <ImageBackground
-      source={require('../../assets/back.jpeg')}
+      // source={require('../../assets/back.jpeg')}
       style={{
         flex: 1,
+        backgroundColor: colors.white,
       }}>
       {/* <StatusBar
         barStyle="dark-content"
@@ -192,33 +193,54 @@ export default function Home({navigation}) {
             // borderBottomLeftRadius: 10,
             // borderBottomRightRadius: 10,
           }}>
-          <View style={{flex: 1, paddingTop: 15}}>
-            <Text
-              style={{
-                fontSize: windowWidth / 25,
-                color: colors.black,
-                fontFamily: fonts.secondary[400],
-              }}>
-              Selamat datang,
-            </Text>
-            <Text
-              style={{
-                fontSize: windowWidth / 25,
-                color: colors.black,
-                fontFamily: fonts.secondary[600],
-              }}>
-              {user.nama_lengkap}
-            </Text>
+          <View style={{flex: 1, paddingTop: 15, flexDirection: 'row'}}>
+            <TouchableOpacity onPress={() => navigation.navigate('Account')}>
+              <Image
+                source={{
+                  uri:
+                    user.foto == null
+                      ? 'https://zavalabs.com/nogambar.jpg'
+                      : user.foto,
+                }}
+                style={{width: 60, height: 60, borderRadius: 30}}
+              />
+            </TouchableOpacity>
+            <View style={{paddingLeft: 10}}>
+              <Text
+                style={{
+                  fontSize: windowWidth / 30,
+                  color: colors.black,
+                  fontFamily: fonts.secondary[400],
+                }}>
+                Selamat datang,
+              </Text>
+              <Text
+                style={{
+                  fontSize: windowWidth / 25,
+                  color: colors.black,
+                  fontFamily: fonts.secondary[600],
+                }}>
+                {user.nama_lengkap}
+              </Text>
+              <Text
+                style={{
+                  fontSize: windowWidth / 25,
+                  color: colors.secondary,
+                  fontFamily: fonts.secondary[600],
+                }}>
+                ( {user.tipe} )
+              </Text>
+            </View>
           </View>
           <View
             style={{
               flexDirection: 'row',
               justifyContent: 'flex-end',
-              flex: 1,
+              alignItems: 'center',
             }}>
             <Image
               source={require('../../assets/logo.png')}
-              style={{width: 100, height: 50, resizeMode: 'stretch'}}
+              style={{width: 60, height: 30, resizeMode: 'stretch'}}
             />
           </View>
         </View>
@@ -265,19 +287,19 @@ export default function Home({navigation}) {
               marginTop: 15,
             }}>
             <DataKategori
-              onPress={() => navigation.navigate('DataInspeksi')}
+              onPress={() => navigation.navigate('Jadwal')}
               icon="calendar-outline"
               nama="PENJADWALAN"
               nama2="PENGGUNAAN LAB"
             />
             <DataKategori
-              onPress={() => navigation.navigate('DataTindak')}
+              onPress={() => navigation.navigate('Barang')}
               icon="flag-outline"
               nama="DAFTAR ALAT"
               nama2="DAN BAHAN"
             />
             <DataKategori
-              onPress={() => navigation.navigate('DataVerifikasi')}
+              onPress={() => navigation.navigate('ListData2')}
               icon="book-outline"
               nama="LOGBOOK"
               nama2="ALAT"
